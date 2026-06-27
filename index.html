@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Phoenix — Roblox Audio Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #08080f;
+    --bg2: #10101c;
+    --bg3: #16162a;
+    --card: #12122080;
+    --violet: #7c3aed;
+    --violet-glow: #7c3aed60;
+    --cyan: #06b6d4;
+    --cyan-glow: #06b6d440;
+    --white: #f0f0ff;
+    --muted: #8888aa;
+    --border: #ffffff12;
+    --border-glow: #7c3aed30;
+    --fire: #f97316;
+    --fire-glow: #f9731640;
+    --ember: #fbbf24;
+    --ember-glow: #fbbf2430;
+    --red: #ef4444;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3rem;
+    background: #08080fcc;
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    color: var(--cyan);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--violet); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--white); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 8rem 2rem 4rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 100%, #7c3aed18 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 50%, #f9731610 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 80% 50%, #7c3aed10 0%, transparent 60%),
+      radial-gradient(ellipse 30% 30% at 70% 80%, #ef444408 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .hero-eyebrow {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+  }
+
+  .hero-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.5rem;
+    color: var(--white);
+  }
+
+  .hero-title .accent-cyan { color: var(--cyan); }
+  .hero-title .accent-violet { color: var(--violet); }
+
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--muted);
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ── WAVEFORM ── */
+  .waveform-wrap {
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto 3rem;
+    position: relative;
+  }
+
+  .waveform {
+    width: 100%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+    justify-content: center;
+    padding: 0 1rem;
+  }
+
+  .wave-bar {
+    width: 3px;
+    background: var(--cyan);
+    border-radius: 2px;
+    opacity: 0.8;
+    animation: pulse 1.4s ease-in-out infinite;
+    box-shadow: 0 0 6px var(--cyan-glow);
+  }
+
+  .wave-bar.violet {
+    background: var(--violet);
+    box-shadow: 0 0 6px var(--violet-glow);
+  }
+
+  .wave-bar.fire {
+    background: var(--fire);
+    box-shadow: 0 0 6px var(--fire-glow);
+  }
+
+  .wave-bar.ember {
+    background: var(--ember);
+    box-shadow: 0 0 6px var(--ember-glow);
+  }
+
+  @keyframes pulse {
+    0%, 100% { transform: scaleY(0.3); }
+    50% { transform: scaleY(1); }
+  }
+
+  .hero-ctas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  /* ── BUTTONS ── */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.75rem;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s;
+    border: none;
+  }
+
+  .btn-primary {
+    background: var(--violet);
+    color: #fff;
+    box-shadow: 0 0 20px var(--violet-glow);
+  }
+
+  .btn-primary:hover {
+    background: #6d28d9;
+    box-shadow: 0 0 32px var(--violet-glow);
+    transform: translateY(-1px);
+  }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--cyan);
+    border: 1px solid var(--cyan);
+  }
+
+  .btn-outline:hover {
+    background: var(--cyan-glow);
+    transform: translateY(-1px);
+  }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 5rem 2rem;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .section-label {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 0.75rem;
+  }
+
+  .section-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 800;
+    color: var(--white);
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .section-desc {
+    color: var(--muted);
+    max-width: 480px;
+    margin-bottom: 3rem;
+    font-size: 0.95rem;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--red), var(--fire), var(--ember), var(--violet), transparent);
+    opacity: 0.35;
+    margin: 0;
+  }
+
+  /* ── TRACK CARDS ── */
+  .tracks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1.25rem;
+  }
+
+  .track-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1.25rem 1.5rem;
+    transition: border-color 0.25s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+  }
+
+  .track-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--violet), var(--cyan));
+    opacity: 0;
+    transition: opacity 0.25s;
+  }
+
+  .track-card:hover { border-color: var(--border-glow); transform: translateY(-3px); }
+  .track-card:hover::before { opacity: 1; }
+
+  .track-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .track-genre {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    background: var(--cyan-glow);
+    padding: 3px 10px;
+    border-radius: 20px;
+  }
+
+  .track-genre.violet {
+    color: #a78bfa;
+    background: var(--violet-glow);
+  }
+
+  .track-genre.warm {
+    color: #f9a8d4;
+    background: #f9a8d415;
+  }
+
+  .track-genre.fire {
+    color: var(--fire);
+    background: var(--fire-glow);
+  }
+
+  .track-genre.ember {
+    color: var(--ember);
+    background: var(--ember-glow);
+  }
+
+  .track-duration {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .track-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 0.35rem;
+    line-height: 1.3;
+  }
+
+  .track-desc {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin-bottom: 1.1rem;
+    line-height: 1.5;
+  }
+
+  /* mini waveform in card */
+  .mini-wave {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    height: 28px;
+    margin-bottom: 1rem;
+  }
+
+  .mini-bar {
+    width: 2px;
+    background: var(--violet);
+    border-radius: 1px;
+    opacity: 0.5;
+  }
+
+  .track-play {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    padding: 0.4rem 1rem;
+    border-radius: 5px;
+    font-size: 0.8rem;
+    cursor: pointer;
+    font-family: 'Inter', sans-serif;
+    transition: all 0.2s;
+    width: 100%;
+    justify-content: center;
+  }
+
+  .track-play:hover {
+    border-color: var(--cyan);
+    color: var(--cyan);
+  }
+
+  .play-icon {
+    width: 14px;
+    height: 14px;
+    border-left: 10px solid currentColor;
+    border-top: 6px solid transparent;
+    border-bottom: 6px solid transparent;
+    border-right: none;
+    display: inline-block;
+  }
+
+  /* ── SFX GRID ── */
+  .sfx-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1rem;
+  }
+
+  .sfx-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1rem 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: border-color 0.2s, transform 0.2s;
+    backdrop-filter: blur(8px);
+    cursor: pointer;
+  }
+
+  .sfx-card:hover { border-color: var(--violet-glow); transform: translateY(-2px); }
+
+  .sfx-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    background: var(--violet-glow);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  .sfx-info { min-width: 0; }
+
+  .sfx-name {
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--white);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-bottom: 2px;
+  }
+
+  .sfx-tag {
+    font-size: 0.7rem;
+    color: var(--muted);
+    letter-spacing: 0.05em;
+  }
+
+  /* ── STATS ── */
+  .stats-row {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 4rem;
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stat-num {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--cyan);
+    line-height: 1;
+    margin-bottom: 0.25rem;
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* ── CONTACT ── */
+  .contact-section {
+    padding: 5rem 2rem 6rem;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .contact-card {
+    background: var(--card);
+    border: 1px solid var(--border-glow);
+    border-radius: 16px;
+    padding: 3.5rem 3rem;
+    position: relative;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+  }
+
+  .contact-card::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -60px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, var(--violet-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .contact-card::after {
+    content: '';
+    position: absolute;
+    bottom: -60px; left: -60px;
+    width: 200px; height: 200px;
+    background: radial-gradient(circle, var(--cyan-glow) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .contact-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 800;
+    margin-bottom: 0.75rem;
+  }
+
+  .contact-sub {
+    color: var(--muted);
+    max-width: 380px;
+    margin: 0 auto 2.5rem;
+    font-size: 0.95rem;
+  }
+
+  .contact-form {
+    display: grid;
+    gap: 1rem;
+    text-align: left;
+  }
+
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+  .field-wrap { display: flex; flex-direction: column; gap: 0.4rem; }
+
+  label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  input, textarea, select {
+    background: #ffffff08;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    color: var(--white);
+    font-family: 'Inter', sans-serif;
+    font-size: 0.9rem;
+    transition: border-color 0.2s;
+    outline: none;
+    width: 100%;
+  }
+
+  input::placeholder, textarea::placeholder { color: var(--muted); }
+
+  input:focus, textarea:focus, select:focus { border-color: var(--violet); }
+
+  select { cursor: pointer; }
+  select option { background: #1a1a2e; }
+
+  textarea { resize: vertical; min-height: 120px; }
+
+  .contact-social {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+  }
+
+  .social-link {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.82rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+    transition: color 0.2s;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+  }
+
+  .social-link:hover { color: var(--cyan); border-color: var(--cyan); }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 0.8rem;
+  }
+
+  footer a { color: var(--violet); text-decoration: none; }
+
+  /* ── TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 2rem; right: 2rem;
+    background: var(--bg3);
+    border: 1px solid var(--cyan);
+    color: var(--cyan);
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    font-weight: 500;
+    z-index: 999;
+    transform: translateY(4rem);
+    opacity: 0;
+    transition: all 0.3s;
+  }
+
+  .toast.show { transform: translateY(0); opacity: 1; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 640px) {
+    nav { padding: 1rem 1.25rem; }
+    .nav-links { display: none; }
+    .form-row { grid-template-columns: 1fr; }
+    .contact-card { padding: 2rem 1.5rem; }
+    .stats-row { gap: 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">PHO<span>ENIX</span></a>
+  <ul class="nav-links">
+    <li><a href="#music">Music</a></li>
+    <li><a href="#sfx">SFX</a></li>
+    <li><a href="#contact">Hire me</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <p class="hero-eyebrow">Roblox Audio Portfolio</p>
+  <h1 class="hero-title">
+    Sound that <span class="accent-cyan">ignites</span><br>
+    your <span class="accent-violet">world</span>
+  </h1>
+  <p class="hero-sub">Original music tracks and custom SFX crafted for Roblox experiences — from epic boss fights to ambient open worlds.</p>
+
+  <div class="waveform-wrap">
+    <div class="waveform" id="waveform"></div>
+  </div>
+
+  <div class="hero-ctas">
+    <a href="#music" class="btn btn-primary">Browse tracks</a>
+    <a href="#contact" class="btn btn-outline">Hire me</a>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- MUSIC SECTION -->
+<section id="music">
+  <p class="section-label">Tracks</p>
+  <h2 class="section-title">Music library</h2>
+  <p class="section-desc">Original compositions for every type of Roblox experience. All tracks are loopable and Roblox ToS-compliant.</p>
+
+  <div class="stats-row">
+    <div class="stat"><span class="stat-num" style="color:var(--fire)">100+</span><span class="stat-label">Tracks composed</span></div>
+    <div class="stat"><span class="stat-num">30+</span><span class="stat-label">Games produced for</span></div>
+    <div class="stat"><span class="stat-num" style="color:var(--ember)">12</span><span class="stat-label">Games shipped</span></div>
+  </div>
+
+  <div class="tracks-grid">
+    <div class="track-card">
+      <div class="track-meta">
+        <span class="track-genre">Ambient · Synthwave</span>
+        <span class="track-duration"></span>
+      </div>
+      <div class="mini-wave" id="mw1"></div>
+      <div class="track-name">Realms</div>
+      <div class="track-desc">Drifting synthwave textures with atmospheric pads. Great for open-world exploration and vast in-game environments.</div>
+      <button class="track-play" onclick="playPreview(this, 'Realms')">
+        <span class="play-icon"></span> Preview
+      </button>
+    </div>
+
+    <div class="track-card">
+      <div class="track-meta">
+        <span class="track-genre warm">Traditional · Lobby</span>
+        <span class="track-duration"></span>
+      </div>
+      <div class="mini-wave" id="mw2"></div>
+      <div class="track-name">Japanese Lobby</div>
+      <div class="track-desc">Calm traditional Japanese instrumentation perfect for themed lobbies, waiting rooms, and social hubs.</div>
+      <button class="track-play" onclick="playPreview(this, 'Japanese Lobby')">
+        <span class="play-icon"></span> Preview
+      </button>
+    </div>
+
+    <div class="track-card">
+      <div class="track-meta">
+        <span class="track-genre violet">Dark · Ambient</span>
+        <span class="track-duration"></span>
+      </div>
+      <div class="mini-wave" id="mw3"></div>
+      <div class="track-name">Trailer</div>
+      <div class="track-desc">Dark, cinematic ambient track built for game trailers, cutscenes, and dramatic in-game moments.</div>
+      <button class="track-play" onclick="playPreview(this, 'Trailer')">
+        <span class="play-icon"></span> Preview
+      </button>
+    </div>
+
+    <div class="track-card">
+      <div class="track-meta">
+        <span class="track-genre">Ethereal · Exploration</span>
+        <span class="track-duration"></span>
+      </div>
+      <div class="mini-wave" id="mw4"></div>
+      <div class="track-name">Lost</div>
+      <div class="track-desc">Ethereal and otherworldly — ideal for exploration sequences, mysterious biomes, and open-world wandering.</div>
+      <button class="track-play" onclick="playPreview(this, 'Lost')">
+        <span class="play-icon"></span> Preview
+      </button>
+    </div>
+
+    <div class="track-card">
+      <div class="track-meta">
+        <span class="track-genre fire">Intense · Chase</span>
+        <span class="track-duration"></span>
+      </div>
+      <div class="mini-wave" id="mw5"></div>
+      <div class="track-name">80 Seconds</div>
+      <div class="track-desc">High-tension chase music that builds relentlessly. Perfect for timed events, escape sequences, and adrenaline moments.</div>
+      <button class="track-play" onclick="playPreview(this, '80 Seconds')">
+        <span class="play-icon"></span> Preview
+      </button>
+    </div>
+
+    <div class="track-card">
+      <div class="track-meta">
+        <span class="track-genre">Synthwave · Electronic</span>
+        <span class="track-duration"></span>
+      </div>
+      <div class="mini-wave" id="mw6"></div>
+      <div class="track-name">Electric Dreams</div>
+      <div class="track-desc">Punchy synthwave and electronic energy. Works great for futuristic games, racing, and neon-lit city maps.</div>
+      <button class="track-play" onclick="playPreview(this, 'Electric Dreams')">
+        <span class="play-icon"></span> Preview
+      </button>
+    </div>
+
+    <div class="track-card">
+      <div class="track-meta">
+        <span class="track-genre ember">8-bit · Lobby</span>
+        <span class="track-duration"></span>
+      </div>
+      <div class="mini-wave" id="mw7"></div>
+      <div class="track-name">Slime Lobby</div>
+      <div class="track-desc">Playful 8-bit lobby track with retro charm. Ideal for casual games, slime-themed experiences, and fun lobbies.</div>
+      <button class="track-play" onclick="playPreview(this, 'Slime Lobby')">
+        <span class="play-icon"></span> Preview
+      </button>
+    </div>
+
+    <div class="track-card">
+      <div class="track-meta">
+        <span class="track-genre fire">Intense · Boss</span>
+        <span class="track-duration"></span>
+      </div>
+      <div class="mini-wave" id="mw8"></div>
+      <div class="track-name">Boss Theme</div>
+      <div class="track-desc">Hard-hitting boss battle music with driving intensity. Designed for raid encounters, final bosses, and elite enemy fights.</div>
+      <button class="track-play" onclick="playPreview(this, 'Boss Theme')">
+        <span class="play-icon"></span> Preview
+      </button>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SFX SECTION -->
+<section id="sfx">
+  <p class="section-label">Sound Effects</p>
+  <h2 class="section-title">SFX library</h2>
+  <p class="section-desc">Punchy, game-ready sound effects engineered to sit cleanly in Roblox's audio engine. Click to preview.</p>
+
+  <div class="sfx-grid">
+    <!-- Weapons -->
+    <div class="sfx-card" onclick="playPreview(this, 'Explosion')">
+      <div class="sfx-icon">💥</div>
+      <div class="sfx-info">
+        <div class="sfx-name">Explosion</div>
+        <div class="sfx-tag">Weapons</div>
+      </div>
+    </div>
+    <div class="sfx-card" onclick="playPreview(this, 'Grenade Explosion')">
+      <div class="sfx-icon">💣</div>
+      <div class="sfx-info">
+        <div class="sfx-name">Grenade Explosion</div>
+        <div class="sfx-tag">Weapons</div>
+      </div>
+    </div>
+    <div class="sfx-card" onclick="playPreview(this, 'AK-47')">
+      <div class="sfx-icon">🔫</div>
+      <div class="sfx-info">
+        <div class="sfx-name">AK-47</div>
+        <div class="sfx-tag">Weapons</div>
+      </div>
+    </div>
+    <div class="sfx-card" onclick="playPreview(this, 'Turret')">
+      <div class="sfx-icon">🎯</div>
+      <div class="sfx-info">
+        <div class="sfx-name">Turret</div>
+        <div class="sfx-tag">Weapons</div>
+      </div>
+    </div>
+    <div class="sfx-card" onclick="playPreview(this, 'Sword Swing')">
+      <div class="sfx-icon">⚔️</div>
+      <div class="sfx-info">
+        <div class="sfx-name">Sword Swing</div>
+        <div class="sfx-tag">Weapons</div>
+      </div>
+    </div>
+    <!-- Game UI -->
+    <div class="sfx-card" onclick="playPreview(this, 'Level Up')">
+      <div class="sfx-icon">⬆️</div>
+      <div class="sfx-info">
+        <div class="sfx-name">Level Up</div>
+        <div class="sfx-tag">Game UI</div>
+      </div>
+    </div>
+    <div class="sfx-card" onclick="playPreview(this, 'Click')">
+      <div class="sfx-icon">🖱️</div>
+      <div class="sfx-info">
+        <div class="sfx-name">Click</div>
+        <div class="sfx-tag">Game UI</div>
+      </div>
+    </div>
+    <div class="sfx-card" onclick="playPreview(this, 'Hover')">
+      <div class="sfx-icon">✦</div>
+      <div class="sfx-info">
+        <div class="sfx-name">Hover</div>
+        <div class="sfx-tag">Game UI</div>
+      </div>
+    </div>
+    <!-- Abilities / Environment -->
+    <div class="sfx-card" onclick="playPreview(this, 'Electricity')">
+      <div class="sfx-icon">⚡</div>
+      <div class="sfx-info">
+        <div class="sfx-name">Electricity</div>
+        <div class="sfx-tag">Abilities</div>
+      </div>
+    </div>
+    <div class="sfx-card" onclick="playPreview(this, 'Forest Ambience')">
+      <div class="sfx-icon">🌲</div>
+      <div class="sfx-info">
+        <div class="sfx-name">Forest Ambience</div>
+        <div class="sfx-tag">Environment • Loop</div>
+      </div>
+    </div>
+    <!-- Sports -->
+    <div class="sfx-card" onclick="playPreview(this, 'Ball Hit Net')">
+      <div class="sfx-icon">🥅</div>
+      <div class="sfx-info">
+        <div class="sfx-name">Ball Hit Net</div>
+        <div class="sfx-tag">Sports</div>
+      </div>
+    </div>
+    <div class="sfx-card" onclick="playPreview(this, 'Ball Kick')">
+      <div class="sfx-icon">⚽</div>
+      <div class="sfx-info">
+        <div class="sfx-name">Ball Kick</div>
+        <div class="sfx-tag">Sports</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<div class="contact-section" id="contact">
+  <div class="contact-card">
+    <p class="section-label" style="text-align:center;">Work with me</p>
+    <h2 class="contact-title">Let's build something<br><span style="color:var(--fire)">unforgettable</span></h2>
+    <p class="contact-sub">Available for commissions, game bundles, and exclusive licensing. Fast turnaround — usually within 3–5 days.</p>
+
+    <div style="margin: 2rem 0; display: flex; flex-direction: column; align-items: center; gap: 1rem;">
+      <p style="color: var(--muted); font-size: 0.9rem;">Reach out on Discord to get started:</p>
+      <div style="display: flex; align-items: center; gap: 1rem; background: #ffffff08; border: 1px solid var(--fire-glow); border-radius: 10px; padding: 1.25rem 2rem;">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="var(--fire)"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.031.053a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03z"/></svg>
+        <div>
+          <div style="font-family: 'Orbitron', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--white); letter-spacing: 0.04em;">phoenixz_314</div>
+          <div style="font-size: 0.75rem; color: var(--muted); margin-top: 2px;">Discord username</div>
+        </div>
+        <button onclick="copyDiscord()" style="margin-left: 1rem; background: var(--fire-glow); border: 1px solid var(--fire); color: var(--fire); padding: 0.4rem 0.9rem; border-radius: 5px; font-size: 0.78rem; font-weight: 600; cursor: pointer; font-family: 'Inter', sans-serif; transition: all 0.2s;">Copy</button>
+      </div>
+      <p style="color: var(--muted); font-size: 0.8rem; max-width: 340px; text-align: center; line-height: 1.6;">Send me a message with your game genre, mood, and any references — I'll get back to you fast.</p>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>© 2025 Phoenix — Roblox Audio Portfolio. All tracks original and ToS-compliant.</p>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  // ── WAVEFORM GENERATOR ──
+  function buildWave(containerId, count) {
+    const el = document.getElementById(containerId);
+    if (!el) return;
+    const classes = ['', 'violet', 'fire', '', 'ember', 'violet', 'fire', ''];
+    const heights = Array.from({length: count}, () => Math.random() * 0.7 + 0.3);
+    heights.forEach((h, i) => {
+      const bar = document.createElement('div');
+      bar.className = 'wave-bar ' + (classes[i % classes.length] || '');
+      bar.style.height = (h * 80) + 'px';
+      bar.style.animationDelay = (i * 0.04) + 's';
+      el.appendChild(bar);
+    });
+  }
+
+  buildWave('waveform', 120);
+
+  // ── MINI WAVEFORMS ──
+  function buildMiniWave(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const heights = [4, 8, 14, 10, 20, 16, 24, 18, 28, 22, 18, 14, 20, 16, 12, 8, 16, 22, 18, 12, 8, 14, 20, 16, 10, 6];
+    heights.forEach(h => {
+      const bar = document.createElement('div');
+      bar.className = 'mini-bar';
+      bar.style.height = h + 'px';
+      el.appendChild(bar);
+    });
+  }
+
+  ['mw1','mw2','mw3','mw4','mw5','mw6','mw7','mw8'].forEach(buildMiniWave);
+
+  // ── TOAST ──
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2500);
+  }
+
+  // ── PLAY PREVIEW ──
+  function playPreview(el, name) {
+    showToast('▶ Playing: ' + name + ' (add your audio here)');
+  }
+
+  // ── COPY DISCORD ──
+  function copyDiscord() {
+    navigator.clipboard.writeText('phoenixz_314').then(() => {
+      showToast('✓ Copied: phoenixz_314');
+    });
+  }
+
+  // ── SCROLL FADE ──
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = 1;
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.track-card, .sfx-card').forEach(el => {
+    el.style.opacity = 0;
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease, border-color 0.25s, transform 0.2s';
+    observer.observe(el);
+  });
+</script>
+</body>
+</html>
