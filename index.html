@@ -652,7 +652,115 @@
 
   .specialty-tag:hover { color: var(--cyan); border-color: var(--cyan); }
 
-  /* ── CONTACT ── */
+  /* ── FULL BIO CARD ── */
+  .full-bio-card {
+    margin-top: 2.5rem;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    backdrop-filter: blur(8px);
+  }
+
+  .full-bio-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 1.75rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    user-select: none;
+  }
+
+  .full-bio-header:hover { background: #ffffff06; }
+
+  .bio-chevron {
+    color: var(--muted);
+    font-size: 0.85rem;
+    transition: transform 0.3s;
+  }
+
+  .bio-chevron.open { transform: rotate(180deg); }
+
+  .full-bio-body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    border-top: 1px solid transparent;
+  }
+
+  .full-bio-body.open {
+    max-height: 600px;
+    border-top-color: var(--border);
+  }
+
+  .bio-cols {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    padding: 2rem 1.75rem;
+  }
+
+  @media (max-width: 640px) { .bio-cols { grid-template-columns: 1fr; } }
+
+  .bio-col-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--cyan);
+    margin-bottom: 1rem;
+  }
+
+  .bio-row {
+    display: flex;
+    gap: 0.85rem;
+    align-items: flex-start;
+    margin-bottom: 1.1rem;
+  }
+
+  .bio-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
+
+  .bio-row strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--white);
+    margin-bottom: 2px;
+  }
+
+  .bio-years {
+    display: inline-block;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    color: var(--fire);
+    background: var(--fire-glow);
+    border-radius: 20px;
+    padding: 1px 8px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+
+  .bio-row p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.5;
+    margin-top: 2px;
+  }
+
+  .bio-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+  }
+
+  .bio-list li {
+    font-size: 0.85rem;
+    color: #b0b0cc;
+    line-height: 1.5;
+  }
   .contact-section {
     padding: 5rem 2rem 6rem;
     max-width: 800px;
@@ -899,11 +1007,51 @@
       </div>
     </div>
   </div>
+
+  <!-- FULL BIO -->
+  <div class="full-bio-card">
+    <div class="full-bio-header" onclick="toggleBio()">
+      <div>
+        <p class="section-label" style="margin-bottom:0.25rem;">Full Bio</p>
+        <span style="font-size:0.9rem; color:var(--muted);">Experience, specialties & why work with me</span>
+      </div>
+      <span class="bio-chevron" id="bio-chevron">▼</span>
+    </div>
+
+    <div class="full-bio-body" id="full-bio-body">
+      <div class="bio-cols">
+
+        <div class="bio-col">
+          <h4 class="bio-col-title">What I Offer</h4>
+          <div class="bio-row"><span class="bio-icon">🎼</span><div><strong>Music Composition</strong><span class="bio-years">9 yrs</span><p>My primary specialty. Original tracks that give your game its own identity and atmosphere.</p></div></div>
+          <div class="bio-row"><span class="bio-icon">🔊</span><div><strong>SFX Design</strong><span class="bio-years">5 yrs</span><p>Game-ready custom sound effects built for Roblox's audio engine.</p></div></div>
+          <div class="bio-row"><span class="bio-icon">🎙️</span><div><strong>Voice Acting</strong><span class="bio-years">3 yrs</span><p>Characters, narration, and in-game dialogue.</p></div></div>
+        </div>
+
+        <div class="bio-col">
+          <h4 class="bio-col-title">Why Work With Me</h4>
+          <ul class="bio-list">
+            <li>🎧 Full audio package — music, SFX and voice in one place</li>
+            <li>🎮 5 years of Roblox development experience</li>
+            <li>🧠 Understands game design beyond just audio</li>
+            <li>⚡ Highly responsive and available every day</li>
+            <li>💰 Low-cost, developer-friendly pricing</li>
+          </ul>
+
+          <h4 class="bio-col-title" style="margin-top:1.5rem;">Additional Experience</h4>
+          <ul class="bio-list">
+            <li>🛠️ 3D Modelling & Building</li>
+            <li>🧪 Game Testing & QA</li>
+            <li>📋 Project Management</li>
+            <li>👥 Led teams & communities of 50,000+ members</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
 </div>
-
-<div class="divider"></div>
-
-<!-- MUSIC SECTION -->
 <section id="music">
   <p class="section-label">Tracks</p>
   <h2 class="section-title">Music library</h2>
@@ -1016,6 +1164,32 @@
       <div class="track-name">Boss Theme</div>
       <div class="track-desc">Hard-hitting boss battle music with driving intensity. Designed for raid encounters, final bosses, and elite enemy fights.</div>
       <button class="track-play" onclick="playTrack(this, 'Boss_Theme')">
+        <span class="play-icon"></span> Preview
+      </button>
+    </div>
+
+    <div class="track-card">
+      <div class="track-meta">
+        <span class="track-genre">Calm · Ambient</span>
+        <span class="track-duration"></span>
+      </div>
+      <div class="mini-wave" id="mw9"></div>
+      <div class="track-name">Campsite</div>
+      <div class="track-desc">Warm, relaxed atmosphere for quiet moments. Suited to camp hubs, safe zones, and cozy exploration games.</div>
+      <button class="track-play" onclick="playTrack(this, 'Campsite')">
+        <span class="play-icon"></span> Preview
+      </button>
+    </div>
+
+    <div class="track-card">
+      <div class="track-meta">
+        <span class="track-genre">Horror · Lobby</span>
+        <span class="track-duration"></span>
+      </div>
+      <div class="mini-wave" id="mw10"></div>
+      <div class="track-name">Horror Lobby</div>
+      <div class="track-desc">Eerie, unsettling lobby music that builds tension before the round starts. Made for horror games and spooky hubs.</div>
+      <button class="track-play" onclick="playTrack(this, 'Horror_Lobby')">
         <span class="play-icon"></span> Preview
       </button>
     </div>
@@ -1197,6 +1371,8 @@
 <audio id="track-Electric_Dreams" src="Electric_Dreams.wav" preload="none"></audio>
 <audio id="track-Slime_Lobby" src="Slime_Lobby.wav" preload="none"></audio>
 <audio id="track-Boss_Theme" src="Boss_Theme.wav" preload="none"></audio>
+<audio id="track-Campsite" src="Campsite.wav" preload="none"></audio>
+<audio id="track-Horror_Lobby" src="Horror_Lobby.wav" preload="none"></audio>
 
 <div class="toast" id="toast"></div>
 
@@ -1241,7 +1417,7 @@
     });
   }
 
-  ['mw1','mw2','mw3','mw4','mw5','mw6','mw7','mw8'].forEach(buildMiniWave);
+  ['mw1','mw2','mw3','mw4','mw5','mw6','mw7','mw8','mw9','mw10'].forEach(buildMiniWave);
 
   // ── TOAST ──
   function showToast(msg) {
@@ -1306,6 +1482,14 @@
     audio.currentTime = 0;
     audio.play().catch(() => showToast('Could not load audio — check the file is uploaded.'));
     audio.onended = () => { currentSFX = null; };
+  }
+
+  // ── BIO TOGGLE ──
+  function toggleBio() {
+    const body = document.getElementById('full-bio-body');
+    const chevron = document.getElementById('bio-chevron');
+    body.classList.toggle('open');
+    chevron.classList.toggle('open');
   }
 
   // ── COPY DISCORD ──
